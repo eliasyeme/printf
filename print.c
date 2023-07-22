@@ -13,6 +13,8 @@ int (*call_f(char c))(va_list)
 		{'c', print_c},
 		{'s', print_s},
 		{'%', print_p},
+		{'d', print_i},
+		{'i', print_i},
 		{'\0', NULL}
 	};
 
