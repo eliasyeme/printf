@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdio.h>
 
 /**
  * _printf - simple implementation of printf
@@ -8,12 +7,25 @@
  */
 int _printf(const char *format, ...)
 {
-	int len = 0;
+	int i = 0, len = 0;
 	va_list args;
 
-	va_start(args, format);
-	len = vprintf(format, args);
-	va_end(args);
+	if (format == NULL)
+		return (-1);
 
+	va_start(args, format);
+	while (format[i])
+	{
+		if (format[i] == '%')
+		{
+			i++;
+
+			len += call_f(format[i])(args);
+		}
+		else
+			len += _putchar(format[i]);
+		i++;
+	}
+	va_end(args);
 	return (len);
 }
