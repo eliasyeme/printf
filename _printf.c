@@ -7,7 +7,7 @@
  */
 int _printf(const char *format, ...)
 {
-	int i, j, hlen;
+	int hlen;
 	int len = 0;
 	va_list args;
 
@@ -25,32 +25,7 @@ int _printf(const char *format, ...)
 		return (0);
 
 	va_start(args, format);
-	for (i = 0; format[i]; i++)
-	{
-		char c0 = format[i];
-		char c1 = format[i + 1];
-		if(c0 == '%' && c1 != '%' && c1)
-		{
-			j = 0;
-			while (j < hlen && (c1 != fn[j].c))
-				j++;
-
-			if (j < (hlen - 1))
-			{
-				len += fn[j].f(args);
-				i++;
-			}
-			else
-				len += _putchar(c0);
-		}
-		else
-		{
-			len += _putchar(c0);
-			if (c0 == '%' && c1 == '%')
-				i++;
-		}
-	}
+	len = print(args, format, hlen, fn);
 	va_end(args);
-
 	return (len);
 }
