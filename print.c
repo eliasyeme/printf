@@ -1,43 +1,27 @@
 #include "main.h"
 
 /**
- * print - print to stdout
- * @args: argument list
- * @format: string
- * @hlen: funtion list number
- * @fn: funtion list with specifier
- * Return: character length
+ * call_f - print to stdout
+ * @c: format specifier
+ * Return: printer function or NULL on fail
  */
-int print(va_list args, const char *format, int hlen, phandler_t fn[])
+int (*call_f(char c))(va_list)
 {
+	int i;
 
-	int i, j;
-	int len = 0;
+	phandler_t fn[] = {
+		{'c', print_c},
+		{'s', print_s},
+		{'%', print_p},
+		{'\0', NULL}
+	};
 
-	for (i = 0; format[i]; i++)
+	i = 0;
+	while (fn[i].c)
 	{
-		char c0 = format[i], c1 = format[i + 1];
-
-		if (c0 == '%' && c1 != '%' && c1)
-		{
-			j = 0;
-			while (j < hlen && (c1 != fn[j].c))
-				j++;
-			if (j < (hlen - 1))
-			{
-				len += fn[j].f(args);
-				i++;
-			}
-			else
-				len += _putchar(c0);
-		}
-		else
-		{
-			len += _putchar(c0);
-			if (c0 == '%' && c1 == '%')
-				i++;
-		}
+		if (c == fn[i].c)
+			return (fn[i].f);
+		i++;
 	}
-
-	return (len);
+	return (NULL);
 }

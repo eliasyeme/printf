@@ -28,3 +28,14 @@ int print_c(va_list args)
 {
 	return (_putchar(va_arg(args, int)));
 }
+
+/**
+ * print_p - print percent sign
+ * @args: argument list
+ * Return: 1 always
+ */
+int print_p(va_list args)
+{
+	(void) args;
+	return (_putchar('%'));
+}
