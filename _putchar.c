@@ -3,10 +3,9 @@
 /**
 	* _putchar - print character to stdout
 	* @c: character to be printed
-	* Return: 1 always
+	* Return: 1 on success -1 on fail
 	*/
 int _putchar(char c)
 {
-	write(STDIN_FILENO, &c, 1);
-	return (1);
+return(write(STDIN_FILENO, &c, 1));
 }
