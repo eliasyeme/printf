@@ -19,7 +19,7 @@ int _printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-			
+
 			len += call_f(format[i])(args);
 		}
 		else
