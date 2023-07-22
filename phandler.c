@@ -10,10 +10,12 @@ int print_s(va_list args)
 	int i;
 	char *s = va_arg(args, char *);
 
+	if (s == NULL)
+		s = "(null)";
+
 	for (i = 0; s[i]; i++)
-	{
 		_putchar(s[i]);
-	}
+
 	return (i);
 }
 
