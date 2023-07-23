@@ -1,16 +1,21 @@
 #include "main.h"
 
+/**
+ * _vprintf - takes format string and prints it
+ * @format: format string
+ * @args: argument list
+ * Return: length of the characters
+ */
 int _vprintf(const char *format, va_list args)
 {
 	int len = 0, state = 0;
 
 	while (*format)
 	{
-		if (state == 0) {
+		if (state == 0)
+		{
 			if (*format == '%')
-			{
 				state = 1;
-			}
 			else
 				len += _putchar(*format);
 		}

@@ -2,12 +2,13 @@
 
 /**
  * print_s - print string
- * @args: argument list
+ * @s: string to print
  * Return: number of characters
  */
 int print_s(char *s)
 {
 	int i;
+
 	if (s == NULL)
 		s = "(null)";
 

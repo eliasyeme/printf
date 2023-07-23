@@ -19,7 +19,7 @@ void print_i_helper(int n)
 		i = n;
 
 	if (i / 10)
-			print_i_helper(i / 10);
+		print_i_helper(i / 10);
 	_putchar((i % 10) + '0');
 }
 
