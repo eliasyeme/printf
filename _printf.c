@@ -53,7 +53,10 @@ int _printf(const char *format, ...)
 			len += call_f(format[i], args);
 		}
 		else
-			len += _putchar(format[i]);
+		{
+			_putchar(format[i]);
+			len++;
+		}
 		i++;
 	}
 	va_end(args);
