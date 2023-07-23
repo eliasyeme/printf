@@ -5,11 +5,9 @@
  * @args: argument list
  * Return: number of characters
  */
-int print_s(va_list args)
+int print_s(char *s)
 {
 	int i;
-	char *s = va_arg(args, char *);
-
 	if (s == NULL)
 		s = "(null)";
 
