@@ -16,48 +16,91 @@ return (write(1, &c, 1));
  */
 int _printf(const char *format, ...)
 {
-int chars_printed = 0;
-va_list args;
-va_start(args, format);
+int count = 0;
+va_list arg;
+va_start(arg, format);
 
-while (*format)
+if (format == NULL)
+{
+va_end(arg);
+return (-1);
+}
+while (*format != '\0')
 {
 if (*format == '%')
 {
 format++;
-switch (*format)
+if (*format == 's')
 {
-	case 'c':{
-		char ch = va_arg(args, int);
-
-		chars_printed += _putchar(ch);
-		break;
-		}
-	case 's':{
-		char *str = va_arg(args, char *);
-
-		while (*str)
-		{
-		chars_printed += _putchar(*str);
-		str++;
-		}
-		break;
-		}
-	case '%':
-		chars_printed += _putchar('%');
-		break;
-	default:
-		break;
+char *str = va_arg(arg, char*);
+if (str == NULL)
+{
+_putchar('%');
+_putchar('s');
+count += 2;
+}
+else
+{
+while (*str != '\0')
+{
+_putchar(*str);
+str++;
+count++;
+}
+}
+}
+else if (*format == 'd')
+{
+int num = va_arg(arg, int);
+if (num == 0)
+{
+_putchar('0');
+count++;
+}
+else
+{
+char buffer[20];
+int i = 0;
+if (num < 0)
+{
+_putchar('-');
+count++;
+num = -num;
+}
+while (num > 0)
+{
+buffer[i] = (num % 10) + '0';
+num /= 10;
+i++;
+}
+while (i > 0)
+{
+i--;
+_putchar(buffer[i]);
+count++;
+}
 }
 }
 else
 {
-chars_printed += _putchar(*format);
+_putchar('%');
+count++;
+if (*format != '\0')
+{
+_putchar(*format);
+count++;
+}
+}
+}
+else
+{
+_putchar(*format);
+count++;
 }
 format++;
 }
-va_end(args);
-return (chars_printed);
+va_end(arg);
+return (count);
 }
 /**
  * main - my main function
@@ -68,14 +111,10 @@ return (chars_printed);
  */
 int main(void)
 {
-char ch = 'A';
-char *str = "Hello, World!";
+char s[10] = "hello";
+int x = 20;
 
-
-int chars_printed = _printf("Character: %c\n", ch);
-chars_printed += _printf("String: %s\n", str);
-chars_printed += _printf("Percentage sign: %%\n");
-
-_printf("Total characters printed: %d\n", chars_printed);
+_printf("%s\n", s);
+_printf("%d\n", x);
 return (0);
 }
