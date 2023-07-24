@@ -11,9 +11,8 @@ int print_str(char *s)
 
 	if (s == NULL)
 	{
-		_putchar('%');
-		_putchar('s');
-		len += 2;
+		s = "(null)";
+		len += 6;
 	}
 	else
 	{
