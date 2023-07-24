@@ -13,6 +13,9 @@ int _printf(const char *format, ...)
 	if (format == NULL)
 		return (-1);
 
+	if (*format == '\0')
+		return (0);
+
 	va_start(arg, format);
 	while (*format != '\0')
 	{
@@ -36,10 +39,7 @@ int _printf(const char *format, ...)
 				count += _putchar('%');
 			}
 			else
-			{
-				if (*format != '\0')
-					count += _putchar(*format);
-			}
+				count += _putchar(*format);
 		}
 		else
 			count += _putchar(*format);
