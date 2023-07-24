@@ -28,5 +28,7 @@ int print_s(char *);
 int print_c(va_list);
 int print_p(va_list);
 int print_i(va_list);
+int print_str(char *);
+int print_num(int);
 
 #endif /* MAIN_H */
