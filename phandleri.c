@@ -1,27 +1,5 @@
 #include "main.h"
 
-/**
- * print_i_helper - helper function to print_i
- * @n: number to print
- * Return: number of characters
- *
- */
-void print_i_helper(int n)
-{
-	unsigned int i;
-
-	if (n < 0)
-	{
-		_putchar('-');
-		i = -n;
-	}
-	else
-		i = n;
-
-	if (i / 10)
-		print_i_helper(i / 10);
-	_putchar((i % 10) + '0');
-}
 
 /**
  * print_i - print integer to stdout
@@ -30,19 +8,26 @@ void print_i_helper(int n)
  */
 int print_i(va_list args)
 {
-	int i = va_arg(args, int);
-	int n = i, len;
+	int n = va_arg(args, int);
+	int mod = 1, len = 0;
+	unsigned int num;
 
-	if (i < 0)
-		n = i * -1;
-
-	while (n > 0)
+	if (n < 0)
 	{
-		n /= 10;
-		len++;
+		len += _putchar('-');
+		num = -n;
 	}
+	else
+		num = n;
 
-	print_i_helper(i);
+	while (num / mod > 9)
+		mod *= 10;
 
+	while (mod > 0)
+	{
+		len += _putchar('0' + (num / mod));
+		num %= mod;
+		mod /= 10;
+	}
 	return (len);
 }
