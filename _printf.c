@@ -38,6 +38,8 @@ int _printf(const char *format, ...)
                                 count += print_o(arg);
 			else if (*format == 'X')
                                 count += print_X(arg);
+			else if (*format == 'x')
+                                count += print_x(arg);
 			else
 				count += _putchar(*format);
 		}
