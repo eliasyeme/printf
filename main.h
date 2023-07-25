@@ -30,5 +30,7 @@ int print_p(va_list);
 int print_i(va_list);
 int print_str(char *);
 int print_num(int);
+char *convert(unsigned long num, int base, int lower);
+int print_binary(va_list);
 
 #endif /* MAIN_H */
