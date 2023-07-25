@@ -34,5 +34,6 @@ char *convert(unsigned long num, int base, int lower);
 int print_binary(va_list);
 int print_u(va_list u);
 int print_o(va_list o);
+int print_X(va_list X)
 
 #endif /* MAIN_H */

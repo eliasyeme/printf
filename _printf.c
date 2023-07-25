@@ -36,6 +36,8 @@ int _printf(const char *format, ...)
 				count += print_u(arg);
 			else if (*format == 'o')
                                 count += print_o(arg);
+			else if (*format == 'X')
+                                count += print_X(arg);
 			else
 				count += _putchar(*format);
 		}
