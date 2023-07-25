@@ -34,6 +34,8 @@ int _printf(const char *format, ...)
 				count += print_binary(arg);
 			else if (*format == 'u')
 				count += print_u(arg);
+			else if (*format == 'o')
+                                count += print_o(arg);
 			else
 				count += _putchar(*format);
 		}
