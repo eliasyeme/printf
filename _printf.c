@@ -23,21 +23,13 @@ int _printf(const char *format, ...)
 		{
 			format++;
 			if (*format == 's')
-			{
 				count += print_str(va_arg(arg, char*));
-			}
 			else if (*format == 'c')
-			{
 				count += _putchar(va_arg(arg, int));
-			}
 			else if (*format == 'd' || *format == 'i')
-			{
 				count += print_i(arg);
-			}
 			else if (*format == '%')
-			{
 				count += _putchar('%');
-			}
 			else
 				count += _putchar(*format);
 		}
