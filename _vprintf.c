@@ -1,45 +1,97 @@
 #include "main.h"
 
 /**
+ * get_flag - turn flag on based on formater
+ * @s: specifier
+ * @f: flag
+ * Return: 1 flag found else 0
+ */
+int get_flag(char s, flags_t *f)
+{
+	int i = 0;
+
+	switch (s)
+	{
+		case '+':
+			f->plus = 1;
+			i = 1;
+			break;
+		case ' ':
+			f->space = 1;
+			i = 1;
+			break;
+		case '#':
+			f->hash = 1;
+			i = 1;
+			break;
+	}
+
+	return (i);
+}
+/**
+ *
+ */
+int (*get_print(char s))(va_list, flags_t *)
+{
+	phandler_t func_arr[] = {
+		{'i', print_int},
+		{'d', print_int},
+		{'u', print_unsigned},
+		{'s', print_string_handler},
+		{'c', print_char},
+		{'x', print_hex_lower},
+		{'X', print_hex_upper},
+		{'b', print_binary},
+		{'o', print_octal},
+		{'%', print_percent}
+		};
+	int flags = 14;
+
+	register int i;
+
+	for (i = 0; i < flags; i++)
+		if (func_arr[i].c == s)
+			return (func_arr[i].f);
+	return (NULL);
+}
+
+/**
  * _vprintf - takes format string and prints it
  * @format: format string
- * @args: argument list
+ * @args: argsument list
  * Return: length of the characters
  */
 int _vprintf(const char *format, va_list args)
 {
-	int len = 0, state = 0;
+	int (*pfunc)(va_list, flags_t *);
+	const char *p;
+	flags_t flags = {0, 0, 0};
 
-	while (*format)
+	register int len = 0;
+
+	if (!format || (format[0] == '%' && !format[1]))
+		return (-1);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	for (p = format; *p; p++)
 	{
-		if (state == 0)
+		if (*p == '%')
 		{
-			if (*format == '%')
-				state = 1;
-			else
-				len += _putchar(*format);
-		}
-		else if (state == 1)
-		{
-			switch (*format)
+			p++;
+			if (*p == '%')
 			{
-				case 'c':
-					len += _putchar(va_arg(args, int));
-					break;
-				case 's':
-					len += print_s(va_arg(args, char *));
-					break;
-				case '%':
-					len += _putchar('%');
-					break;
-				default:
-					len += _putchar(*format);
-					break;
+				len += _putchar('%');
+				continue;
 			}
-			state = 0;
-		}
-		format++;
+			while (get_flag(*p, &flags))
+				p++;
+			pfunc = get_print(*p);
+			len += (pfunc)
+				? pfunc(args, &flags)
+				: _printf("%%%c", *p);
+		} else
+			len += _putchar(*p);
 	}
-
+	_putchar(-1);
 	return (len);
 }
