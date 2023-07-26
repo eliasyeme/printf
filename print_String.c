@@ -2,7 +2,7 @@
 
 /**
  * print_String - print exclusuives string.
- * @val: argumen t.
+ * @l: argumen list
  * Return: the length of the string.
  */
 
@@ -37,7 +37,7 @@ int print_String(va_list l)
  * Return: true or false
  */
 
-int isNonAlphaNumeric(char c) 
+int isNonAlphaNumeric(char c)
 {
 	return ((c > 0 && c < 32) || c >= 127);
 }
