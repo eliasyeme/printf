@@ -1,19 +1,18 @@
 #include "main.h"
 
 /**
- * print_octal - Prints the numeric representation of a number in octal base
- * @list: List of all the arguments passed to the program
- * Return: Number of symbols printed to stdout
+ * print_octal - prints base 10 number in octal base
+ * @args: argument list
+ *
+ * Return: character length
  */
-
-int print_octal(va_list list)
+int print_octal(va_list args)
 {
 	unsigned int num;
 	int len;
-	char *octal_rep;
-	char *rev_str;
+	char *octal_rep, *rev_str;
 
-	num = va_arg(list, unsigned int);
+	num = va_arg(args, unsigned int);
 
 	if (num == 0)
 		return (_putchar('0'));
@@ -22,7 +21,7 @@ int print_octal(va_list list)
 	len = base_len(num, 8);
 
 	octal_rep = malloc(sizeof(char) * len + 1);
-	if (octal_rep == NULL)
+	if (!octal_rep)
 		return (-1);
 	for (len = 0; num > 0; len++)
 	{
@@ -32,7 +31,7 @@ int print_octal(va_list list)
 	}
 	octal_rep[len] = '\0';
 	rev_str = rev_string(octal_rep);
-	if (rev_str == NULL)
+	if (!rev_str)
 		return (-1);
 
 	write_base(rev_str);
@@ -40,4 +39,3 @@ int print_octal(va_list list)
 	free(rev_str);
 	return (len);
 }
-

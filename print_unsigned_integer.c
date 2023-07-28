@@ -1,51 +1,49 @@
 #include "main.h"
 
 /**
- * print_unsigned_integer - Prints Unsigned integers
- * @list: List of all of the argumets
- * Return: a count of the numbers
+ * print_unsigned_integer - prints Unsigned integers
+ * @args: argument list
+ *
+ * Return: number length
  */
-
-int print_unsigned_integer(va_list list)
+int print_unsigned_integer(va_list args)
 {
 	unsigned int num;
 
-	num = va_arg(list, unsigned int);
+	num = va_arg(args, unsigned int);
 
 	if (num == 0)
-		return (print_unsgined_number(num));
+		return (print_unsigned_helper(num));
 
 	if (num < 1)
 		return (-1);
-	return (print_unsgined_number(num));
+	return (print_unsigned_helper(num));
 }
 
-
 /**
- * print_unsgined_number - Prints an unsigned number
+ * print_unsigned_helper - prints an unsigned number
  * @n: unsigned integer to be printed
- * Return: The amount of numbers printed
+ *
+ * Return: number length
  */
-
-int print_unsgined_number(unsigned int n)
+int print_unsigned_helper(unsigned int n)
 {
-	int div;
-	int len;
+	int mod, len;
 	unsigned int num;
 
-	div = 1;
+	mod = 1;
 	len = 0;
 
 	num = n;
 
-	for (; num / div > 9; )
-		div *= 10;
+	for (; num / mod > 9; )
+		mod *= 10;
 
-	for (; div != 0; )
+	for (; mod != 0; )
 	{
-		len += _putchar('0' + num / div);
-		num %= div;
-		div /= 10;
+		len += _putchar('0' + num / mod);
+		num %= mod;
+		mod /= 10;
 	}
 
 	return (len);

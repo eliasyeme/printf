@@ -1,35 +1,32 @@
 #include "main.h"
 
 /**
- * print_integer - Prints an integer
- * @list: list of arguments
- * Return: Will return the amount of characters printed.
+ * print_integer - prints an integer
+ * @args: argument list
+ *
+ * Return: character length
  */
-
-int print_integer(va_list list)
+int print_integer(va_list args)
 {
-	int num_length;
+	int len;
 
-	num_length = print_number(list);
-	return (num_length);
+	len = print_number(args);
+	return (len);
 }
 
-
 /**
- * print_number - prints a number send to this function
- * @args: List of arguments
- * Return: The number of arguments printed
+ * print_number - prints number
+ * @args: argument list
+ *
+ * Return: number length
  */
-
 int print_number(va_list args)
 {
-	int n;
-	int div;
-	int len;
+	int n, mod, len;
 	unsigned int num;
 
 	n  = va_arg(args, int);
-	div = 1;
+	mod = 1;
 	len = 0;
 
 	if (n < 0)
@@ -40,17 +37,15 @@ int print_number(va_list args)
 	else
 		num = n;
 
-	for (; num / div > 9; )
-		div *= 10;
+	for (; num / mod > 9; )
+		mod *= 10;
 
-	for (; div != 0; )
+	for (; mod != 0; )
 	{
-		len += _putchar('0' + num / div);
-		num %= div;
-		div /= 10;
+		len += _putchar('0' + num / mod);
+		num %= mod;
+		mod /= 10;
 	}
 
 	return (len);
 }
-
-

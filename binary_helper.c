@@ -1,43 +1,39 @@
 #include "main.h"
 
 /**
- * base_len - Calculates the length for an octal number
- * @num: The number for which the length is being calculated
- * @base: Base to be calculated by
- * Return: An integer representing the length of a number
+ * base_len - length of an octal number
+ * @num: input number
+ * @base: input base
+ *
+ * Return: number length
  */
-
 unsigned int base_len(unsigned int num, int base)
 {
 	unsigned int i;
 
 	for (i = 0; num > 0; i++)
-	{
 		num = num / base;
-	}
+
 	return (i);
 }
 
-
 /**
  * rev_string - reverses a string in place
- *
  * @s: string to reverse
- * Return: A pointer to a character
+ *
+ * Return: pointer to revered string
  */
-
 char *rev_string(char *s)
 {
-	int len;
-	int head;
+	int len = 0, head;
 	char tmp;
 	char *dest;
 
-	for (len = 0; s[len] != '\0'; len++)
-	{}
+	while (s[len])
+		len++;
 
 	dest = malloc(sizeof(char) * len + 1);
-	if (dest == NULL)
+	if (!dest)
 		return (NULL);
 
 	_memcpy(dest, s, len);
@@ -50,12 +46,10 @@ char *rev_string(char *s)
 	return (dest);
 }
 
-
 /**
- * write_base - sends characters to be written on standard output
+ * write_base - write string to stdout
  * @str: String to parse
  */
-
 void write_base(char *str)
 {
 	int i;
@@ -64,15 +58,14 @@ void write_base(char *str)
 		_putchar(str[i]);
 }
 
-
 /**
  * _memcpy - copy memory area
- * @dest: Destination for copying
- * @src: Source to copy from
+ * @dest: destination memeory
+ * @src: source memeory
  * @n: The number of bytes to copy
- * Return: The _memcpy() function returns a pointer to dest.
+ *
+ * Return: pointer to dest
  */
-
 char *_memcpy(char *dest, char *src, unsigned int n)
 {
 	unsigned int i;
@@ -85,16 +78,15 @@ char *_memcpy(char *dest, char *src, unsigned int n)
 
 
 /**
- * hex_check - Checks which hex function is calling it
- * @num: Number to convert into letter
- * @x: Tells which hex function is calling it
- * Return: Ascii value for a letter
+ * hex_check - checks which hex function is calling it
+ * @num: number to convert into letter
+ * @x: tells which hex function is calling it
+ *
+ * Return: ascii value for a letter
  */
-
 int hex_check(int num, char x)
 {
-	char *hex = "abcdef";
-	char *Hex = "ABCDEF";
+	char *hex = "abcdef", *Hex = "ABCDEF";
 
 	num = num - 10;
 	if (x == 'x')

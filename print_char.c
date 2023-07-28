@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
- * print_char - Prints character
- * @list: list of arguments
- * Return: Will return the amount of characters printed.
+ * print_char - prints character
+ * @args: argument list
+ *
+ * Return: 1 always
  */
-
-int print_char(va_list list)
+int print_char(va_list args)
 {
-	_putchar(va_arg(list, int));
+	_putchar(va_arg(args, int));
 	return (1);
 }

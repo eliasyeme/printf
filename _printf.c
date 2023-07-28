@@ -1,16 +1,15 @@
 #include "main.h"
 
 /**
- * _printf - Receives the main string and all the necessary parameters to
- * print a formated string
- * @format: A string containing all the desired characters
- * Return: A total count of the characters printed
+ * _printf - handle string with format specifier
+ * @format: string with format specifier
+ *
+ * Return: character length
  */
-
 int _printf(const char *format, ...)
 {
-	int printed_chars;
-	conver_t f_list[] = {
+	int len;
+	handler_t fn_list[] = {
 		{"%", print_percent},
 		{"d", print_integer},
 		{"i", print_integer},
@@ -27,14 +26,14 @@ int _printf(const char *format, ...)
 		{"R", print_rot13},
 		{NULL, NULL},
 	};
-	va_list arg_list;
+	va_list args;
 
 	if (format == NULL)
 		return (-1);
 
-	va_start(arg_list, format);
-	printed_chars = format_reciever(format, f_list, arg_list);
-	va_end(arg_list);
-	return (printed_chars);
+	va_start(args, format);
+	len = format_handler(format, fn_list, args);
+	va_end(args);
+	return (len);
 }
 

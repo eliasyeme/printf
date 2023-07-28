@@ -1,11 +1,10 @@
 #include "main.h"
 
 /**
- * _putchar - writes the character c to stdout
- * @c: The character to print
+ * _putchar - write character to stdout
+ * @c: character to print
  *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * Return: 1 on success -1 on fail
  */
 int _putchar(char c)
 {
@@ -14,13 +13,14 @@ int _putchar(char c)
 
 
 /**
- * _puts - prints a string to stdout
- * @str: pointer to the string to print
- * Return: number of chars written
+ * _puts - prints string to stdout
+ * @str: string to print
+ *
+ * Return: chars length
  */
 int _puts(char *str)
 {
-	register short i;
+	int i;
 
 	for (i = 0; str[i]; i++)
 		_putchar(str[i]);

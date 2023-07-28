@@ -1,19 +1,18 @@
 #include "main.h"
 
 /**
- * print_binary - Converts a number from base 10 to binary
- * @list: List of arguments passed to this function
- * Return: The length of the number printed
+ * print_binary - converts base 10 to binary
+ * @args: argument list
+ *
+ * Return: number length
  */
-
-int print_binary(va_list list)
+int print_binary(va_list args)
 {
 	unsigned int num;
 	int i, len;
-	char *str;
-	char *rev_str;
+	char *str, *rev_str;
 
-	num = va_arg(list, unsigned int);
+	num = va_arg(args, unsigned int);
 	if (num == 0)
 		return (_putchar('0'));
 	if (num < 1)

@@ -1,20 +1,18 @@
 #include "main.h"
 
 /**
- * print_HEX - Prints a representation of a decimal number on base16 Uppercase
- * @list: List of the arguments passed to the function
- * Return: Number of characters printed
+ * print_HEX - base10 to base16 uppercase
+ * @args: argument list
+ *
+ * Return: character length
  */
-
-int print_HEX(va_list list)
+int print_HEX(va_list args)
 {
 	unsigned int num;
-	int len;
-	int rem_num;
-	char *hex_rep;
-	char *rev_hex;
+	int len, rem_num;
+	char *hex_rep, *rev_hex;
 
-	num = va_arg(list, unsigned int);
+	num = va_arg(args, unsigned int);
 
 	if (num == 0)
 		return (_putchar('0'));
@@ -22,7 +20,7 @@ int print_HEX(va_list list)
 		return (-1);
 	len = base_len(num, 16);
 	hex_rep = malloc(sizeof(char) * len + 1);
-	if (hex_rep == NULL)
+	if (!hex_rep)
 		return (-1);
 	for (len = 0; num > 0; len++)
 	{
@@ -38,11 +36,10 @@ int print_HEX(va_list list)
 	}
 	hex_rep[len] = '\0';
 	rev_hex = rev_string(hex_rep);
-	if (rev_hex == NULL)
+	if (!rev_hex)
 		return (-1);
 	write_base(rev_hex);
 	free(hex_rep);
 	free(rev_hex);
 	return (len);
 }
-

@@ -1,41 +1,40 @@
 #include "main.h"
 
 /**
- * format_reciever - Receives the main string and all the
- * necessary parameters to print a formated string.
- * @format: A string containing all the desired characters.
- * @f_list: A list of all the posible functions.
- * @arg_list: A list containing all the argumentents passed to the program.
- * Return: A total count of the characters printed.
+ * format_handler - handle input string and format
+ * @format: input string
+ * @fn_list: funtion list to handle formats
+ * @args: argument list
+ *
+ * Return: character length
  */
-
-int format_reciever(const char *format, conver_t f_list[], va_list arg_list)
+int format_handler(const char *format, handler_t fn_list[], va_list args)
 {
-	int i, j, r_val, printed_chars;
+	int i, j, r_val, len;
 
-	printed_chars = 0;
-	for (i = 0; format[i] != '\0'; i++)
+	len = 0;
+	for (i = 0; format[i]; i++)
 	{
 		if (format[i] == '%')
 		{
-			for (j = 0; f_list[j].sym != NULL; j++)
+			for (j = 0; fn_list[j].f != NULL; j++)
 			{
-				if (format[i + 1] == f_list[j].sym[0])
+				if (format[i + 1] == fn_list[j].f[0])
 				{
-					r_val = f_list[j].f(arg_list);
+					r_val = fn_list[j].fn(args);
 					if (r_val == -1)
 						return (-1);
-					printed_chars += r_val;
+					len += r_val;
 					break;
 				}
 			}
-			if (f_list[j].sym == NULL && format[i + 1] != ' ')
+			if (!fn_list[j].f && format[i + 1] != ' ')
 			{
-				if (format[i + 1] != '\0')
+				if (format[i + 1])
 				{
 					_putchar(format[i]);
 					_putchar(format[i + 1]);
-					printed_chars = printed_chars + 2;
+					len = len + 2;
 				}
 				else
 					return (-1);
@@ -45,9 +44,8 @@ int format_reciever(const char *format, conver_t f_list[], va_list arg_list)
 		else
 		{
 			_putchar(format[i]);
-			printed_chars++;
+			len++;
 		}
 	}
-	return (printed_chars);
+	return (len);
 }
-
